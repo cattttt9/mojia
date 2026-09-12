@@ -1,0 +1,4 @@
+spring:
+  flyway:
+    # 生产环境不允许自动接管一个来源不明的非空 schema。
+    baseline-on-migrate: false

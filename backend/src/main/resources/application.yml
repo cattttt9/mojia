@@ -1,0 +1,58 @@
+server:
+  port: ${PORT:8066}
+  forward-headers-strategy: framework
+  error:
+    include-message: never
+    include-stacktrace: never
+
+
+spring:
+  profiles:
+    active: ${SPRING_PROFILES_ACTIVE:local}
+  datasource:
+    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/inkshelf}
+    username: ${DATABASE_USER:postgres}
+    password: ${DATABASE_PASSWORD:}
+  redis:
+    host: ${REDIS_HOST:localhost}
+    port: ${REDIS_PORT:6379}
+    password: ${REDIS_PASSWORD:}
+    timeout: 2s
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+    properties:
+      hibernate.jdbc.time_zone: UTC
+  flyway:
+    enabled: true
+    # 本地开发兼容：如果 public 中已经手工创建了 V1 的表，自动登记为版本 1。
+    # 空数据库不会跳过 V1，Flyway 仍会正常执行迁移脚本创建表。
+    baseline-on-migrate: ${FLYWAY_BASELINE_ON_MIGRATE:true}
+    baseline-version: 1
+
+inkshelf:
+  jwt-secret: ${JWT_SECRET}
+  encryption-key: ${ENCRYPTION_KEY}
+  allowed-origin: ${ALLOWED_ORIGIN:http://localhost:5173}
+  weread-gateway: https://i.weread.qq.com/api/agent/gateway
+  weread-skill-version: 1.0.4
+  ai:
+    # 智谱 Key 只允许从环境变量读取，不写入仓库；建议在 IDEA Run Configuration 中配置 ZHIPU_API_KEY。
+    zhipu-api-key: ${ZHIPU_API_KEY:}
+    zhipu-base-url: ${ZHIPU_API_BASE_URL:https://open.bigmodel.cn/api/paas/v4}
+    model: ${ZHIPU_MODEL:glm-4.7}
+    # 三种阅读洞察共享额度；阅读星图 AI 单独计数。
+    insight-requests-per-minute: ${AI_INSIGHT_REQUESTS_PER_MINUTE:3}
+    star-map-requests-per-minute: ${AI_STAR_MAP_REQUESTS_PER_MINUTE:1}
+  star-map:
+    max-books: ${STAR_MAP_MAX_BOOKS:60}
+    max-relations: ${STAR_MAP_MAX_RELATIONS:120}
+    same-period-days: ${STAR_MAP_SAME_PERIOD_DAYS:30}
+
+management:
+  endpoints.web.exposure.include: health,info,metrics,prometheus
+  endpoint.health.show-details: never
+
+logging:
+  pattern.level: "%5p [requestId:%X{requestId:-}]"

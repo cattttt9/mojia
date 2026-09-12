@@ -1,0 +1,471 @@
+.reading-forest-section {
+  --forest-ink: var(--green, #244f43);
+  --forest-deep: #173f35;
+  --forest-sage: #7f9b79;
+  --forest-mist: #c7d2b5;
+  --forest-paper: var(--paper, #f3edda);
+  --forest-gold: var(--ochre, #dcae42);
+  --forest-line: rgba(32, 77, 64, .82);
+  --forest-axis: rgba(36, 79, 67, .28);
+  --forest-copy: rgba(31, 46, 41, .7);
+  --forest-background-opacity: .66;
+  --forest-background-filter: saturate(1.32) contrast(1) brightness(1);
+  --forest-area-opacity: .74;
+  --forest-axis-label: rgba(239, 235, 212, .76);
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(320px, 36%) minmax(0, 64%);
+  min-height: 590px;
+  margin-top: 80px;
+  margin-bottom: 92px;
+  overflow: hidden;
+  isolation: isolate;
+  border: 1px solid color-mix(in srgb, var(--forest-ink) 13%, transparent);
+  border-radius: 24px;
+  color: var(--forest-deep);
+  background: linear-gradient(105deg, #eee5ce 0%, #f1ebda 52%, #eee7d4 100%);
+  box-shadow: 0 26px 70px rgba(39, 54, 46, .12), inset 0 1px rgba(255, 255, 255, .68);
+  transition: color .55s ease, background .55s ease, border-color .55s ease;
+}
+
+.reading-forest-section--night {
+  --forest-ink: #8eac96;
+  --forest-deep: #eef1df;
+  --forest-sage: #708b77;
+  --forest-mist: #587064;
+  --forest-paper: #233e36;
+  --forest-gold: #e5bc5b;
+  --forest-line: rgba(183, 209, 185, .9);
+  --forest-axis: rgba(210, 224, 201, .2);
+  --forest-copy: rgba(235, 240, 221, .7);
+  --forest-background-opacity: .3;
+  --forest-background-filter: grayscale(.22) saturate(.68) contrast(.86) brightness(1.18);
+  --forest-area-opacity: .1;
+  --forest-axis-label: rgba(238, 241, 223, .72);
+  background: linear-gradient(108deg, #29483f 0%, #27443b 48%, #203a33 100%);
+  border-color: rgba(231, 236, 215, .1);
+  box-shadow: 0 28px 74px rgba(11, 28, 23, .2), inset 0 1px rgba(255, 255, 255, .06);
+}
+
+.reading-forest-section__paper {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  overflow: hidden;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: .42;
+  background: linear-gradient(118deg, rgba(255, 255, 255, .28), transparent 42%);
+}
+
+.reading-forest-section__mode {
+  position: absolute;
+  z-index: 30;
+  top: 20px;
+  right: 22px;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 36px;
+  padding: 8px 13px;
+  border: 1px solid color-mix(in srgb, var(--forest-ink) 18%, transparent);
+  border-radius: 999px;
+  color: var(--forest-ink);
+  background: color-mix(in srgb, var(--forest-paper) 88%, transparent);
+  box-shadow: 0 7px 18px rgba(24, 48, 40, .08);
+  font-size: 11px;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+}
+
+.reading-forest-section__mode svg { width: 14px; height: 14px; }
+.reading-forest-section__mode:focus-visible,
+.reading-forest-summary__action:focus-visible {
+  outline: 2px solid var(--forest-gold);
+  outline-offset: 3px;
+}
+
+.reading-forest-summary {
+  position: relative;
+  z-index: 8;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+  padding: 62px 30px 58px 52px;
+  background: linear-gradient(90deg, color-mix(in srgb, var(--forest-paper) 98%, transparent) 0%, color-mix(in srgb, var(--forest-paper) 94%, transparent) 76%, color-mix(in srgb, var(--forest-paper) 70%, transparent) 91%, transparent 100%);
+}
+
+.reading-forest-summary__eyebrow {
+  margin-bottom: 21px;
+  color: color-mix(in srgb, var(--forest-ink) 62%, transparent);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .32em;
+}
+
+.reading-forest-summary h2 {
+  margin: 0;
+  max-width: 344px;
+  color: var(--forest-deep);
+  font: 500 clamp(32px, 2.65vw, 44px)/1.24 "Noto Serif SC", "Songti SC", serif;
+  letter-spacing: -.028em;
+}
+
+.reading-forest-summary h2 span { display: block; white-space: nowrap; }
+
+.reading-forest-summary > p {
+  max-width: 320px;
+  min-height: 52px;
+  margin: 24px 0 22px;
+  color: var(--forest-copy);
+  font-size: 13px;
+  line-height: 1.9;
+}
+
+.reading-forest-summary > p strong { color: var(--forest-ink); font-weight: 650; }
+
+.reading-forest-summary__stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  max-width: 340px;
+  margin-bottom: 28px;
+}
+
+.reading-forest-summary__stats > div {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  padding-right: 10px;
+  border-right: 1px solid color-mix(in srgb, var(--forest-ink) 18%, transparent);
+}
+
+.reading-forest-summary__stats > div:last-child { border-right: 0; }
+.reading-forest-summary__stats strong {
+  overflow: hidden;
+  color: var(--forest-deep);
+  font-size: 12px;
+  font-weight: 650;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.reading-forest-summary__stats span { margin-top: 5px; color: var(--forest-copy); font-size: 10px; }
+
+.reading-forest-summary__action {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 32px;
+  min-height: 47px;
+  padding: 0 18px;
+  border: 1px solid color-mix(in srgb, var(--forest-ink) 18%, transparent);
+  border-radius: 7px;
+  color: var(--forest-deep);
+  background: color-mix(in srgb, var(--forest-paper) 92%, white 8%);
+  box-shadow: 0 10px 24px rgba(35, 52, 43, .08);
+  transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+}
+.reading-forest-summary__action:hover { transform: translateY(-2px); box-shadow: 0 14px 28px rgba(35, 52, 43, .12); }
+.reading-forest-summary__action svg { width: 16px; }
+
+.reading-forest-section__chart {
+  position: relative;
+  z-index: 5;
+  min-width: 0;
+  min-height: 590px;
+  overflow: hidden;
+  padding: 0;
+}
+
+.forest-canopy-chart {
+  position: relative;
+  width: 100%;
+  min-width: 0;
+  height: 590px;
+  overflow: hidden;
+}
+
+.forest-canopy-chart__scroll {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in srgb, var(--forest-ink) 30%, transparent) transparent;
+}
+
+.forest-canopy-chart__stage {
+  position: relative;
+  isolation: isolate;
+}
+.forest-canopy-chart__stage::before,
+.forest-canopy-chart__stage::after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  pointer-events: none;
+}
+.forest-canopy-chart__stage::before {
+  background: linear-gradient(
+    to bottom,
+    color-mix(in srgb, var(--forest-paper) 64%, transparent) 0%,
+    color-mix(in srgb, var(--forest-paper) 42%, transparent) 20%,
+    color-mix(in srgb, var(--forest-paper) 12%, transparent) 42%,
+    transparent 62%
+  );
+}
+.forest-canopy-chart__stage::after {
+  background: linear-gradient(90deg, var(--forest-paper) 0%, color-mix(in srgb, var(--forest-paper) 78%, transparent) 8%, transparent 28%);
+}
+.forest-background {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center bottom;
+  opacity: var(--forest-background-opacity);
+  mix-blend-mode: multiply;
+  filter: var(--forest-background-filter);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, .1) 10%, rgba(0, 0, 0, .38) 30%, rgba(0, 0, 0, .78) 55%, #000 78%, #000 100%);
+  mask-image: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, .1) 10%, rgba(0, 0, 0, .38) 30%, rgba(0, 0, 0, .78) 55%, #000 78%, #000 100%);
+  pointer-events: none;
+}
+.reading-forest-section--night .forest-background {
+  mix-blend-mode: soft-light;
+}
+
+.forest-canopy-chart__svg { position: relative; z-index: 2; display: block; overflow: visible; }
+
+.forest-canopy-chart__area-reveal {
+  clip-path: inset(100% 0 0 0);
+  transition: clip-path 920ms cubic-bezier(.22, .72, .18, 1) 80ms;
+}
+.forest-canopy-chart.is-visible .forest-canopy-chart__area-reveal { clip-path: inset(0 0 0 0); }
+.forest-canopy-chart__area {
+  opacity: var(--forest-area-opacity);
+  mix-blend-mode: multiply;
+}
+.forest-canopy-chart__line {
+  fill: none;
+  stroke: var(--forest-line);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  filter: drop-shadow(0 1px 1px rgba(28, 66, 54, .08));
+  transition: stroke-dashoffset 1120ms cubic-bezier(.25, .72, .2, 1) 130ms;
+}
+.forest-canopy-chart.is-visible .forest-canopy-chart__line { stroke-dashoffset: 0; }
+
+.forest-canopy-chart__month {
+  cursor: pointer;
+  outline: none;
+  opacity: 0;
+  transition: opacity .32s ease calc(500ms + var(--node-delay));
+}
+.forest-canopy-chart.is-visible .forest-canopy-chart__month { opacity: 1; }
+.forest-canopy-chart__hit { fill: transparent; }
+.forest-canopy-chart__node {
+  fill: var(--forest-paper);
+  stroke: var(--forest-ink);
+  stroke-width: 1.5;
+  vector-effect: non-scaling-stroke;
+  transition: r .18s ease, fill .18s ease, stroke .18s ease;
+}
+.forest-canopy-chart__month.is-active .forest-canopy-chart__node { stroke-width: 1.7; }
+.forest-canopy-chart__month.is-strongest .forest-canopy-chart__node {
+  fill: var(--forest-gold);
+  stroke: color-mix(in srgb, var(--forest-gold) 78%, var(--forest-deep));
+}
+.forest-canopy-chart__glow {
+  fill: color-mix(in srgb, var(--forest-gold) 35%, transparent);
+  opacity: .46;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: forest-active-breathe 3.6s ease-in-out infinite;
+}
+.forest-canopy-chart__month:focus-visible .forest-canopy-chart__hit {
+  stroke: var(--forest-gold);
+  stroke-width: 2;
+  stroke-dasharray: 2 3;
+}
+.forest-canopy-chart__month-axis-line {
+  stroke: color-mix(in srgb, var(--forest-gold) 58%, transparent);
+  stroke-width: 1;
+  stroke-linecap: round;
+  vector-effect: non-scaling-stroke;
+  pointer-events: none;
+}
+.forest-canopy-chart__axis-month {
+  color: var(--forest-axis-label);
+  cursor: pointer;
+  outline: none;
+}
+.forest-canopy-chart__month-axis-dot {
+  fill: color-mix(in srgb, var(--forest-ink) 94%, transparent);
+  stroke: color-mix(in srgb, var(--forest-paper) 84%, transparent);
+  stroke-width: 1.7;
+  vector-effect: non-scaling-stroke;
+  transition: r 180ms ease, fill 180ms ease, stroke 180ms ease, filter 180ms ease;
+}
+.forest-canopy-chart__axis-month text {
+  fill: currentColor;
+  font: 500 12px "DM Sans", "Microsoft YaHei", sans-serif;
+  letter-spacing: .01em;
+  pointer-events: none;
+}
+.forest-canopy-chart__axis-month.is-active {
+  color: var(--forest-gold);
+  font-weight: 600;
+}
+.forest-canopy-chart__axis-month.is-active .forest-canopy-chart__month-axis-dot {
+  fill: var(--forest-gold);
+  stroke: color-mix(in srgb, var(--forest-gold) 72%, var(--forest-paper));
+  stroke-width: 2;
+  filter: drop-shadow(0 0 5px color-mix(in srgb, var(--forest-gold) 42%, transparent));
+}
+.forest-canopy-chart__axis-month:focus-visible .forest-canopy-chart__month-axis-dot {
+  stroke: var(--forest-gold);
+  stroke-width: 2.2;
+}
+
+.forest-chart-tooltip {
+  position: absolute;
+  z-index: 20;
+  top: var(--tooltip-top);
+  left: var(--tooltip-left);
+  width: 174px;
+  display: grid;
+  gap: 4px;
+  padding: 10px 11px 11px;
+  border: 1px solid rgba(36, 79, 67, .14);
+  border-radius: 8px;
+  color: var(--forest-deep);
+  background: color-mix(in srgb, var(--forest-paper) 93%, transparent);
+  box-shadow: 0 8px 18px rgba(30, 52, 42, .09);
+  font-size: 10px;
+  line-height: 1.4;
+  pointer-events: none;
+  transform: translateX(-50%);
+  backdrop-filter: blur(5px);
+}
+.forest-chart-tooltip::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -6px;
+  width: 11px;
+  height: 11px;
+  border-right: 1px solid rgba(36, 79, 67, .12);
+  border-bottom: 1px solid rgba(36, 79, 67, .12);
+  background: inherit;
+  transform: translateX(-50%) rotate(45deg);
+}
+.forest-chart-tooltip strong { color: color-mix(in srgb, var(--forest-gold) 72%, var(--forest-deep)); font: 600 12px "Noto Serif SC", "Songti SC", serif; }
+.forest-chart-tooltip time { color: var(--forest-copy); font-size: 8px; letter-spacing: .08em; }
+.forest-chart-tooltip small { color: var(--forest-copy); }
+
+.forest-canopy-chart--empty {
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  min-height: 360px;
+  border-radius: 16px;
+}
+.forest-canopy-chart--empty > img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center bottom;
+  opacity: .16;
+  mix-blend-mode: multiply;
+  -webkit-mask-image: radial-gradient(ellipse 78% 70% at 50% 70%, black 16%, rgba(0, 0, 0, .76) 58%, transparent 100%);
+  mask-image: radial-gradient(ellipse 78% 70% at 50% 70%, black 16%, rgba(0, 0, 0, .76) 58%, transparent 100%);
+}
+.forest-canopy-chart--empty > div { position: relative; display: grid; gap: 8px; max-width: 290px; text-align: center; }
+.forest-canopy-chart--empty strong { font: 500 18px "Noto Serif SC", serif; }
+.forest-canopy-chart--empty span { color: var(--forest-copy); font-size: 12px; }
+
+.reading-forest-skeleton {
+  min-height: 480px;
+  margin-top: 80px;
+  margin-bottom: 92px;
+  border-radius: 24px;
+  background: linear-gradient(100deg, #e1d8be 30%, #eee7d3 46%, #e1d8be 62%);
+  background-size: 220% 100%;
+  animation: forest-shimmer 1.4s linear infinite;
+}
+
+@keyframes forest-active-breathe {
+  0%, 100% { opacity: .42; transform: scale(.88); }
+  50% { opacity: .76; transform: scale(1.08); }
+}
+@keyframes forest-shimmer { to { background-position: -220% 0; } }
+
+@media (max-width: 1080px) {
+  .reading-forest-section { grid-template-columns: minmax(310px, 39%) minmax(0, 61%); }
+  .reading-forest-summary { padding-left: 34px; padding-right: 18px; }
+  .reading-forest-summary h2 { font-size: 35px; }
+}
+
+@media (max-width: 860px) {
+  .reading-forest-section {
+    grid-template-columns: 1fr;
+    min-height: 980px;
+  }
+  .reading-forest-summary {
+    min-height: 390px;
+    padding: 46px 38px 24px;
+    background: linear-gradient(180deg, color-mix(in srgb, var(--forest-paper) 96%, transparent), color-mix(in srgb, var(--forest-paper) 78%, transparent) 84%, transparent);
+  }
+  .reading-forest-summary h2 { max-width: none; }
+  .reading-forest-summary h2 span { display: inline; margin-right: .22em; }
+  .reading-forest-summary > p { max-width: 540px; min-height: 0; margin: 17px 0; }
+  .reading-forest-summary__stats { margin-bottom: 18px; }
+  .reading-forest-section__chart { min-height: 590px; }
+}
+
+@media (max-width: 620px) {
+  .reading-forest-section {
+    width: calc(100% - 24px);
+    min-height: 870px;
+    margin-top: 56px;
+    margin-bottom: 68px;
+    border-radius: 18px;
+  }
+  .reading-forest-section__mode { top: 13px; right: 13px; min-height: 31px; padding: 6px 9px; font-size: 9px; }
+  .reading-forest-summary { min-height: 390px; padding: 48px 20px 18px; }
+  .reading-forest-summary__eyebrow { margin-bottom: 15px; font-size: 9px; }
+  .reading-forest-summary h2 { font-size: 28px; line-height: 1.23; }
+  .reading-forest-summary h2 span { display: block; }
+  .reading-forest-summary > p { margin: 15px 0; font-size: 12px; }
+  .reading-forest-summary__stats { width: 100%; gap: 6px; }
+  .reading-forest-summary__stats strong { font-size: 10px; }
+  .reading-forest-summary__stats span { font-size: 9px; }
+  .reading-forest-summary__action { min-height: 42px; padding: 0 15px; }
+  .reading-forest-section__chart { min-height: 480px; }
+  .forest-canopy-chart { height: 480px; }
+  .forest-canopy-chart__scroll { overflow-x: auto; overflow-y: hidden; overscroll-behavior-inline: contain; }
+  .forest-canopy-chart__axis-month text { font-size: 11px; }
+  .forest-chart-tooltip { width: 174px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reading-forest-section,
+  .reading-forest-summary__action,
+  .forest-canopy-chart__area-reveal,
+  .forest-canopy-chart__line,
+  .forest-canopy-chart__month { transition: none !important; }
+  .forest-canopy-chart__area-reveal { clip-path: inset(0) !important; }
+  .forest-canopy-chart__line { stroke-dashoffset: 0 !important; }
+  .forest-canopy-chart__month { opacity: 1 !important; }
+  .forest-canopy-chart__glow,
+  .reading-forest-skeleton { animation: none !important; }
+}
